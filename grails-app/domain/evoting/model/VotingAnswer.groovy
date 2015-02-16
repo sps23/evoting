@@ -1,6 +1,6 @@
 package evoting.model
 
-class VotingAnswer {
+class VotingAnswer implements Serializable {
 
     static hasMany = [ questionAnswerList : QuestionAnswer]
 

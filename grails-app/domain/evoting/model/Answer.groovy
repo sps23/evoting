@@ -1,6 +1,6 @@
 package evoting.model
 
-class Answer {
+class Answer implements Serializable {
 
     static belongsTo = [ question : Question ]
 

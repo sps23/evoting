@@ -2,7 +2,7 @@ package evoting.model
 
 import org.hibernate.cfg.annotations.Nullability
 
-class Voter {
+class Voter implements Serializable {
 
     //    static belongsTo = [voting : Voting]
 

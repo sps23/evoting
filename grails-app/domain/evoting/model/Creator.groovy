@@ -2,7 +2,7 @@ package evoting.model
 
 import java.util.Date
 
-class Creator {
+class Creator implements Serializable {
 
     //	static belongsTo = [voting : Voting]
 

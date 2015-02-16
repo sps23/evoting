@@ -1,6 +1,6 @@
 package evoting.model
 
-class Voting {
+class Voting implements Serializable {
 
     static int EXP_DATE_MAX = 30
     static int END_DATE_MAX = 7
@@ -43,6 +43,10 @@ class Voting {
         creator(unique:true)
         startDate(min : new Date().clearTime(), max : new Date().clearTime().plus(30))
         endDate(min : new Date().clearTime(), max : new Date().clearTime().plus(7))
+    }
+    @Override
+    public String toString() {
+        return "Voting [creator=" + creator + ", name=" + name + "]"
     }
 
 }

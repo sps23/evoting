@@ -2,7 +2,7 @@ package evoting.model
 
 import java.util.List
 
-class QuestionAnswer {
+class QuestionAnswer implements Serializable {
 
     static hasMany = [ answerList : Answer ]
     static belongsTo = [ votingAnswer : VotingAnswer ]
