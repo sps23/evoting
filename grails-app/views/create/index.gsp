@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="clean-blog" />
+<meta name="layout" content="journal" />
 <title>EVoting Create</title>
 </head>
 <body>
