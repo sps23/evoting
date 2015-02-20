@@ -4,7 +4,7 @@ import org.hibernate.cfg.annotations.Nullability
 
 class Voter implements Serializable {
 
-    //    static belongsTo = [voting : Voting]
+    static belongsTo = [voting : Voting]
 
     String email
     String token

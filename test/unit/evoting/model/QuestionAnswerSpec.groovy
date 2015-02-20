@@ -1,11 +1,10 @@
 package evoting.model
 
 import grails.test.mixin.TestFor
-import grails.test.mixin.TestMixin;
-import grails.test.mixin.domain.DomainClassUnitTestMixin;
-import grails.test.spock.IntegrationSpec;
+import grails.test.mixin.TestMixin
+import grails.test.mixin.domain.DomainClassUnitTestMixin
+import grails.test.spock.IntegrationSpec
 import spock.lang.Specification
-import evoting.model.Question.QuestionTypeEnum;
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
@@ -24,9 +23,9 @@ class QuestionAnswerSpec {
 
         setup:
         Question question = new Question(
-                number: 1,
-                type: QuestionTypeEnum.SINGLE,
-                text: "Pytanie 1?")
+                        number: 1,
+                        type: QuestionTypeEnum.SINGLE,
+                        text: "Pytanie 1?")
 
         Answer answer1 = new Answer(number: 1, text: "ans1")
         Answer answer2 = new Answer(number: 2, text: "ans2")

@@ -13,8 +13,7 @@
 	rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="${request.contextPath}/journal/css/clean-blog.min.css"
-	rel="stylesheet">
+
 
 <g:layoutHead />
 

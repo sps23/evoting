@@ -20,15 +20,6 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: votingInstance, field: 'creator', 'error')} required">
-	<label for="creator">
-		<g:message code="voting.creator.label" default="Creator" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="creator" name="creator.id" from="${evoting.model.Creator.list()}" optionKey="id" required="" value="${votingInstance?.creator?.id}" class="many-to-one"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: votingInstance, field: 'startDate', 'error')} required">
 	<label for="startDate">
 		<g:message code="voting.startDate.label" default="Start Date" />
@@ -65,30 +56,21 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: votingInstance, field: 'creator', 'error')} required">
+	<label for="creator">
+		<g:message code="voting.creator.label" default="Creator" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="creator" name="creator.id" from="${evoting.model.Creator.list()}" optionKey="id" required="" value="${votingInstance?.creator?.id}" class="many-to-one"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: votingInstance, field: 'expirationDate', 'error')} required">
 	<label for="expirationDate">
 		<g:message code="voting.expirationDate.label" default="Expiration Date" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:datePicker name="expirationDate" precision="day"  value="${votingInstance?.expirationDate}"  />
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: votingInstance, field: 'numberOfQuestions', 'error')} required">
-	<label for="numberOfQuestions">
-		<g:message code="voting.numberOfQuestions.label" default="Number Of Questions" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="numberOfQuestions" type="number" value="${votingInstance.numberOfQuestions}" required=""/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: votingInstance, field: 'numberOfVoters', 'error')} required">
-	<label for="numberOfVoters">
-		<g:message code="voting.numberOfVoters.label" default="Number Of Voters" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="numberOfVoters" type="number" value="${votingInstance.numberOfVoters}" required=""/>
 
 </div>
 

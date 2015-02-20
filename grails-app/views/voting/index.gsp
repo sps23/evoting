@@ -28,13 +28,13 @@
 					
 						<g:sortableColumn property="description" title="${message(code: 'voting.description.label', default: 'Description')}" />
 					
-						<th><g:message code="voting.creator.label" default="Creator" /></th>
-					
 						<g:sortableColumn property="startDate" title="${message(code: 'voting.startDate.label', default: 'Start Date')}" />
 					
 						<g:sortableColumn property="endDate" title="${message(code: 'voting.endDate.label', default: 'End Date')}" />
 					
 						<g:sortableColumn property="anonymous" title="${message(code: 'voting.anonymous.label', default: 'Anonymous')}" />
+					
+						<g:sortableColumn property="creationDate" title="${message(code: 'voting.creationDate.label', default: 'Creation Date')}" />
 					
 					</tr>
 				</thead>
@@ -46,13 +46,13 @@
 					
 						<td>${fieldValue(bean: votingInstance, field: "description")}</td>
 					
-						<td>${fieldValue(bean: votingInstance, field: "creator")}</td>
-					
 						<td><g:formatDate date="${votingInstance.startDate}" /></td>
 					
 						<td><g:formatDate date="${votingInstance.endDate}" /></td>
 					
 						<td><g:formatBoolean boolean="${votingInstance.anonymous}" /></td>
+					
+						<td><g:formatDate date="${votingInstance.creationDate}" /></td>
 					
 					</tr>
 				</g:each>

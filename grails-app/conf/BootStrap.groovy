@@ -3,9 +3,10 @@ import javax.swing.plaf.metal.MetalBorders.QuestionDialogBorder
 import evoting.model.Answer
 import evoting.model.Creator
 import evoting.model.Question
-import evoting.model.Question.QuestionTypeEnum
 import evoting.model.QuestionAnswer
+import evoting.model.QuestionTypeEnum
 import evoting.model.Voter
+import evoting.model.Voting
 import evoting.model.VotingAnswer
 import evoting.token.TokenGenerator
 import grails.util.Environment
@@ -52,39 +53,53 @@ class BootStrap {
 
             ulubionyKompozytor.save(flush : true, failOnError:true)
 
-            // Voters
-            Voter voter1 = new Voter(
-                            email: "voter1@svs.pl", token: TokenGenerator.generateToken()).save(flush : true, failOnError:true)
-            Voter voter2 = new Voter(
-                            email: "voter2@svs.pl", token: TokenGenerator.generateToken()).save(flush : true, failOnError:true)
-            Voter voter3 = new Voter(
-                            email: "voter3@svs.pl", token: TokenGenerator.generateToken()).save(flush : true, failOnError:true)
-            Voter voter4 = new Voter(
-                            email: "voter4@svs.pl", token: TokenGenerator.generateToken()).save(flush : true, failOnError:true)
-            Voter voter5 = new Voter(
-                            email: "voter5@svs.pl", token: TokenGenerator.generateToken()).save(flush : true, failOnError:true)
-            Voter voter6 = new Voter(
-                            email: "voter6@svs.pl", token: TokenGenerator.generateToken()).save(flush : true, failOnError:true)
+            Question ulubionyPianistaJazzowy = new Question(
+                            number: 3, type: QuestionTypeEnum.ORDERED, multiplicity: 0, orderedMultiplicity: 3,
+                            text: "Jaki jest Twój ulubiony pianista jazzowy")
 
-            // Creators
-            new Creator(email: "creator1@svs.pl", token: TokenGenerator.generateToken()).save(flush : true, failOnError:true)
-            new Creator(email: "creator2@svs.pl", token: TokenGenerator.generateToken()).save(flush : true, failOnError:true)
-            new Creator(email: "creator3@svs.pl", token: TokenGenerator.generateToken()).save(flush : true, failOnError:true)
+            Answer hancock = new Answer(number: 1, text: "Herbie Hancock")
+            Answer brubeck = new Answer(number: 2, text: "Dave Brubeck")
+            Answer corea = new Answer(number: 3, text: "Chick Corea")
+            Answer jarret = new Answer(number: 4, text: "Keith Jarret")
+            Answer evans = new Answer(number: 5, text: "Bill Evans")
+            ulubionyPianistaJazzowy.addToAnswerList(hancock)
+            ulubionyPianistaJazzowy.addToAnswerList(brubeck)
+            ulubionyPianistaJazzowy.addToAnswerList(corea)
+            ulubionyPianistaJazzowy.addToAnswerList(jarret)
+            ulubionyPianistaJazzowy.addToAnswerList(evans)
+
+            ulubionyKompozytor.save(flush : true, failOnError:true)
 
             // VotingAnswer with answers
-            VotingAnswer votingAnswer1 = new VotingAnswer(voter: voter1, submissionDate: new Date())
+            //            VotingAnswer votingAnswer1 = new VotingAnswer(voter: voter1, submissionDate: new Date())
+            //
+            //            QuestionAnswer questionAnswer1 = new QuestionAnswer(
+            //                            question: ulubionyKompozytor,
+            //                            answerList: [chopin, szymanowski, kilar])
+            //            QuestionAnswer questionAnswer2 = new QuestionAnswer(
+            //                            question: ulubionyPoeta,
+            //                            answerList: [mickiewicz])
+            //            QuestionAnswer questionAnswer3 = new QuestionAnswer(
+            //                            question: ulubionyPianistaJazzowy,
+            //                            answerList: [hancock])
+            //
+            //            votingAnswer1.addToQuestionAnswerList(questionAnswer1)
+            //            votingAnswer1.addToQuestionAnswerList(questionAnswer2)
+            //            votingAnswer1.addToQuestionAnswerList(questionAnswer3)
+            //
+            //            votingAnswer1.save(flush : true, failOnError:true)
 
-            QuestionAnswer questionAnswer1 = new QuestionAnswer(
-                            question: ulubionyKompozytor,
-                            answerList: [chopin, szymanowski, kilar])
-            QuestionAnswer questionAnswer2 = new QuestionAnswer(
-                            question: ulubionyPoeta,
-                            answerList: [mickiewicz])
-
-            votingAnswer1.addToQuestionAnswerList(questionAnswer1)
-            votingAnswer1.addToQuestionAnswerList(questionAnswer2)
-
-            votingAnswer1.save(flush : true, failOnError:true)
+            for(int i = 1; i <= 5; i++) {
+                String s = String.valueOf(i)
+                Creator creator = new Creator(email: ("creator_" + s + "@svs.pl"), token: TokenGenerator.generateToken())
+                Voting  voting = new Voting(name : ("Voting_" + s), description: ("voting_" + s + "_description"), creator: creator)
+                for(int j = 1; j <= 8; j++) {
+                    String v = s + "_" + String.valueOf(j)
+                    Voter voter = new Voter( email: ("voter_" + v + "@svs.pl"), token: TokenGenerator.generateToken())
+                    voting.addToVoterList(voter)
+                }
+                voting.save(flush:true, failOnError:true)
+            }
 
         }
     }

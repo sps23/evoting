@@ -4,7 +4,7 @@ import java.util.Date
 
 class Creator implements Serializable {
 
-    //	static belongsTo = [voting : Voting]
+    static belongsTo = [voting : Voting]
 
     String email
     String token
@@ -20,6 +20,12 @@ class Creator implements Serializable {
 
     @Override
     public String toString() {
-        return email + " [" + token + "]"
+        StringBuilder builder = new StringBuilder()
+        builder.append("Creator [email=")
+        builder.append(email)
+        builder.append(", token=")
+        builder.append(token)
+        builder.append("]")
+        return builder.toString()
     }
 }

@@ -41,15 +41,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${votingInstance?.creator}">
-				<li class="fieldcontain">
-					<span id="creator-label" class="property-label"><g:message code="voting.creator.label" default="Creator" /></span>
-					
-						<span class="property-value" aria-labelledby="creator-label"><g:link controller="creator" action="show" id="${votingInstance?.creator?.id}">${votingInstance?.creator?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${votingInstance?.startDate}">
 				<li class="fieldcontain">
 					<span id="startDate-label" class="property-label"><g:message code="voting.startDate.label" default="Start Date" /></span>
@@ -86,29 +77,20 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${votingInstance?.creator}">
+				<li class="fieldcontain">
+					<span id="creator-label" class="property-label"><g:message code="voting.creator.label" default="Creator" /></span>
+					
+						<span class="property-value" aria-labelledby="creator-label"><g:link controller="creator" action="show" id="${votingInstance?.creator?.id}">${votingInstance?.creator?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${votingInstance?.expirationDate}">
 				<li class="fieldcontain">
 					<span id="expirationDate-label" class="property-label"><g:message code="voting.expirationDate.label" default="Expiration Date" /></span>
 					
 						<span class="property-value" aria-labelledby="expirationDate-label"><g:formatDate date="${votingInstance?.expirationDate}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${votingInstance?.numberOfQuestions}">
-				<li class="fieldcontain">
-					<span id="numberOfQuestions-label" class="property-label"><g:message code="voting.numberOfQuestions.label" default="Number Of Questions" /></span>
-					
-						<span class="property-value" aria-labelledby="numberOfQuestions-label"><g:fieldValue bean="${votingInstance}" field="numberOfQuestions"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${votingInstance?.numberOfVoters}">
-				<li class="fieldcontain">
-					<span id="numberOfVoters-label" class="property-label"><g:message code="voting.numberOfVoters.label" default="Number Of Voters" /></span>
-					
-						<span class="property-value" aria-labelledby="numberOfVoters-label"><g:fieldValue bean="${votingInstance}" field="numberOfVoters"/></span>
 					
 				</li>
 				</g:if>

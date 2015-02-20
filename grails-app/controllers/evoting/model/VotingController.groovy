@@ -39,10 +39,7 @@ class VotingController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [
-                    message(code: 'voting.label', default: 'Voting'),
-                    votingInstance.id
-                ])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'voting.label', default: 'Voting'), votingInstance.id])
                 redirect votingInstance
             }
             '*' { respond votingInstance, [status: CREATED] }
@@ -69,10 +66,7 @@ class VotingController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [
-                    message(code: 'Voting.label', default: 'Voting'),
-                    votingInstance.id
-                ])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Voting.label', default: 'Voting'), votingInstance.id])
                 redirect votingInstance
             }
             '*'{ respond votingInstance, [status: OK] }
@@ -91,10 +85,7 @@ class VotingController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [
-                    message(code: 'Voting.label', default: 'Voting'),
-                    votingInstance.id
-                ])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Voting.label', default: 'Voting'), votingInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -104,10 +95,7 @@ class VotingController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [
-                    message(code: 'voting.label', default: 'Voting'),
-                    params.id
-                ])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'voting.label', default: 'Voting'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
