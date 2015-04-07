@@ -24,9 +24,7 @@ class Voting implements Serializable {
 
     List<Question> questionList = new ArrayList<Question>()
     List<Voter> voterList = new ArrayList<Voter>()
-    List votingAnswerList
-
-    //    static hasOne = [creator : Creator]
+    List<VotingAnswer> votingAnswerList = new ArrayList<VotingAnswer>()
 
     static hasMany = [
         questionList : Question,
@@ -37,7 +35,6 @@ class Voting implements Serializable {
     static constraints = {
         name(blank:false)
         description(blank:false)
-        //        creator(blank:false, unique:true)
         startDate(min : new Date().clearTime(), max : new Date().clearTime().plus(EXP_DATE_MAX))
         endDate(min : new Date().clearTime(), max : new Date().clearTime().plus(END_DATE_MAX))
     }

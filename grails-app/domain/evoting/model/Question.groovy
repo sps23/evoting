@@ -4,6 +4,8 @@ public class Question implements Serializable {
 
     static hasMany = [ answerList : Answer]
 
+    static belongsTo = [voting : Voting]
+
     Integer number
     QuestionTypeEnum type
     String text

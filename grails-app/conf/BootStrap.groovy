@@ -22,7 +22,7 @@ class BootStrap {
             // questions with answers
 
             Question ulubionyPoeta = new Question(
-                            number: 1, type: QuestionTypeEnum.SINGLE, multiplicity: 0, orderedMultiplicity: 0,
+                            number: 1, type: QuestionTypeEnum.SINGLE, multiplicity: 0,
                             text: "Jaki jest Twój ulubiony poeta")
 
             Answer mickiewicz = new Answer(number: 1, text: "Adam Mickiewicz")
@@ -32,10 +32,10 @@ class BootStrap {
             ulubionyPoeta.addToAnswerList(slowacki)
             ulubionyPoeta.addToAnswerList(norwid)
 
-            ulubionyPoeta.save(flush : true, failOnError:true)
+            //            ulubionyPoeta.save(flush : true, failOnError:true)
 
             Question ulubionyKompozytor = new Question(
-                            number: 2, type: QuestionTypeEnum.MULTIPLE, multiplicity: 3, orderedMultiplicity: 0,
+                            number: 2, type: QuestionTypeEnum.MULTIPLE, multiplicity: 3,
                             text: "Jaki jest Twój ulubiony kompozytor")
 
             Answer chopin = new Answer(number: 1, text: "Fryderyk Franciszek Chopin")
@@ -51,10 +51,10 @@ class BootStrap {
             ulubionyKompozytor.addToAnswerList(kilar)
             ulubionyKompozytor.addToAnswerList(moniuszko)
 
-            ulubionyKompozytor.save(flush : true, failOnError:true)
+            //            ulubionyKompozytor.save(flush : true, failOnError:true)
 
             Question ulubionyPianistaJazzowy = new Question(
-                            number: 3, type: QuestionTypeEnum.ORDERED, multiplicity: 0, orderedMultiplicity: 3,
+                            number: 3, type: QuestionTypeEnum.ORDERED, multiplicity: 0,
                             text: "Jaki jest Twój ulubiony pianista jazzowy")
 
             Answer hancock = new Answer(number: 1, text: "Herbie Hancock")
@@ -68,36 +68,40 @@ class BootStrap {
             ulubionyPianistaJazzowy.addToAnswerList(jarret)
             ulubionyPianistaJazzowy.addToAnswerList(evans)
 
-            ulubionyKompozytor.save(flush : true, failOnError:true)
+            //            ulubionyKompozytor.save(flush : true, failOnError:true)
 
-            // VotingAnswer with answers
-            //            VotingAnswer votingAnswer1 = new VotingAnswer(voter: voter1, submissionDate: new Date())
-            //
-            //            QuestionAnswer questionAnswer1 = new QuestionAnswer(
-            //                            question: ulubionyKompozytor,
-            //                            answerList: [chopin, szymanowski, kilar])
-            //            QuestionAnswer questionAnswer2 = new QuestionAnswer(
-            //                            question: ulubionyPoeta,
-            //                            answerList: [mickiewicz])
-            //            QuestionAnswer questionAnswer3 = new QuestionAnswer(
-            //                            question: ulubionyPianistaJazzowy,
-            //                            answerList: [hancock])
-            //
-            //            votingAnswer1.addToQuestionAnswerList(questionAnswer1)
-            //            votingAnswer1.addToQuestionAnswerList(questionAnswer2)
-            //            votingAnswer1.addToQuestionAnswerList(questionAnswer3)
-            //
-            //            votingAnswer1.save(flush : true, failOnError:true)
-
+            String emailDomain = "@svs.pl"
             for(int i = 1; i <= 5; i++) {
                 String s = String.valueOf(i)
-                Creator creator = new Creator(email: ("creator_" + s + "@svs.pl"), token: TokenGenerator.generateToken())
+
+                Creator creator = new Creator(email: ("creator_" + s + emailDomain), token: TokenGenerator.generateToken())
                 Voting  voting = new Voting(name : ("Voting_" + s), description: ("voting_" + s + "_description"), creator: creator)
+
                 for(int j = 1; j <= 8; j++) {
                     String v = s + "_" + String.valueOf(j)
-                    Voter voter = new Voter( email: ("voter_" + v + "@svs.pl"), token: TokenGenerator.generateToken())
+                    Voter voter = new Voter( email: ("voter_" + v + emailDomain), token: TokenGenerator.generateToken())
                     voting.addToVoterList(voter)
                 }
+
+                int qte = 1
+                for(int q = 1; q <= 3; q++) {
+                    QuestionTypeEnum.each {
+                        int number = qte++
+                        String iNumber = String.valueOf(i) + "_" + String.valueOf(number)
+
+                        Question question = new Question(
+                                        number: Integer.valueOf(number), type: it, multiplicity: Integer.valueOf(q),
+                                        text: ("Pytanie numer " + iNumber))
+
+                        for(int a = 1; a <= q + 2; a++) {
+                            Answer answer = new Answer(number: Integer.valueOf(a),
+                            text: ("Odpowiedź " + iNumber + "_" + String.valueOf(a)))
+                            question.addToAnswerList(answer)
+                        }
+                        voting.addToQuestionList(question)
+                    }
+                }
+
                 voting.save(flush:true, failOnError:true)
             }
 

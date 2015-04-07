@@ -16,7 +16,7 @@
 		<g:message code="question.type.label" default="Type" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="type" from="${evoting.model.Question$QuestionTypeEnum?.values()}" keys="${evoting.model.Question$QuestionTypeEnum.values()*.name()}" required="" value="${questionInstance?.type?.name()}" />
+	<g:select name="type" from="${evoting.model.QuestionTypeEnum?.values()}" keys="${evoting.model.QuestionTypeEnum.values()*.name()}" required="" value="${questionInstance?.type?.name()}" />
 
 </div>
 
@@ -38,15 +38,6 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'orderedMultiplicity', 'error')} ">
-	<label for="orderedMultiplicity">
-		<g:message code="question.orderedMultiplicity.label" default="Ordered Multiplicity" />
-		
-	</label>
-	<g:field name="orderedMultiplicity" type="number" value="${questionInstance.orderedMultiplicity}"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'answerList', 'error')} ">
 	<label for="answerList">
 		<g:message code="question.answerList.label" default="Answer List" />
@@ -62,6 +53,15 @@
 </li>
 </ul>
 
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'voting', 'error')} required">
+	<label for="voting">
+		<g:message code="question.voting.label" default="Voting" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="voting" name="voting.id" from="${evoting.model.Voting.list()}" optionKey="id" required="" value="${questionInstance?.voting?.id}" class="many-to-one"/>
 
 </div>
 

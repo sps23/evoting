@@ -59,15 +59,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${questionInstance?.orderedMultiplicity}">
-				<li class="fieldcontain">
-					<span id="orderedMultiplicity-label" class="property-label"><g:message code="question.orderedMultiplicity.label" default="Ordered Multiplicity" /></span>
-					
-						<span class="property-value" aria-labelledby="orderedMultiplicity-label"><g:fieldValue bean="${questionInstance}" field="orderedMultiplicity"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${questionInstance?.answerList}">
 				<li class="fieldcontain">
 					<span id="answerList-label" class="property-label"><g:message code="question.answerList.label" default="Answer List" /></span>
@@ -75,6 +66,15 @@
 						<g:each in="${questionInstance.answerList}" var="a">
 						<span class="property-value" aria-labelledby="answerList-label"><g:link controller="answer" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
 						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${questionInstance?.voting}">
+				<li class="fieldcontain">
+					<span id="voting-label" class="property-label"><g:message code="question.voting.label" default="Voting" /></span>
+					
+						<span class="property-value" aria-labelledby="voting-label"><g:link controller="voting" action="show" id="${questionInstance?.voting?.id}">${questionInstance?.voting?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

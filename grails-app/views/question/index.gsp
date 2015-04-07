@@ -32,7 +32,7 @@
 					
 						<g:sortableColumn property="multiplicity" title="${message(code: 'question.multiplicity.label', default: 'Multiplicity')}" />
 					
-						<g:sortableColumn property="orderedMultiplicity" title="${message(code: 'question.orderedMultiplicity.label', default: 'Ordered Multiplicity')}" />
+						<th><g:message code="question.voting.label" default="Voting" /></th>
 					
 					</tr>
 				</thead>
@@ -48,7 +48,7 @@
 					
 						<td>${fieldValue(bean: questionInstance, field: "multiplicity")}</td>
 					
-						<td>${fieldValue(bean: questionInstance, field: "orderedMultiplicity")}</td>
+						<td>${fieldValue(bean: questionInstance, field: "voting")}</td>
 					
 					</tr>
 				</g:each>
