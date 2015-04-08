@@ -38,3 +38,12 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: voterInstance, field: 'voting', 'error')} required">
+	<label for="voting">
+		<g:message code="voter.voting.label" default="Voting" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="voting" name="voting.id" from="${evoting.model.Voting.list()}" optionKey="id" required="" value="${voterInstance?.voting?.id}" class="many-to-one"/>
+
+</div>
+

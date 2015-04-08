@@ -19,10 +19,27 @@ class BootStrap {
         if(Environment.DEVELOPMENT.equals(Environment.current)) {
 
             println "initializing data for DEV env"
-            // questions with answers
 
+            // voting
+            String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
+                            "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud " +
+                            "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+
+            Creator creator1 = new Creator(email: "easy.voting.office@gmail.com", token: "qwer1234")
+            Voting  voting1 = new Voting(name : "Easy Voting Test", description: description, creator: creator1)
+
+            Voter voterTom = new Voter( email: "easy.voting.tom@gmail.com", token: "tomtom")
+            voting1.addToVoterList(voterTom)
+
+            Voter voterJohn = new Voter( email: "easy.voting.john@gmail.com", token: "johnjohn")
+            voting1.addToVoterList(voterJohn)
+
+            Voter voterKate = new Voter( email: "easy.voting.kate@gmail.com", token: "katekate")
+            voting1.addToVoterList(voterKate)
+
+            // questions with answers
             Question ulubionyPoeta = new Question(
-                            number: 1, type: QuestionTypeEnum.SINGLE, multiplicity: 0,
+                            number: 1, type: QuestionTypeEnum.SINGLE, multiplicity: 1,
                             text: "Jaki jest Twój ulubiony poeta")
 
             Answer mickiewicz = new Answer(number: 1, text: "Adam Mickiewicz")
@@ -31,8 +48,7 @@ class BootStrap {
             ulubionyPoeta.addToAnswerList(mickiewicz)
             ulubionyPoeta.addToAnswerList(slowacki)
             ulubionyPoeta.addToAnswerList(norwid)
-
-            //            ulubionyPoeta.save(flush : true, failOnError:true)
+            voting1.addToQuestionList(ulubionyPoeta)
 
             Question ulubionyKompozytor = new Question(
                             number: 2, type: QuestionTypeEnum.MULTIPLE, multiplicity: 3,
@@ -50,11 +66,10 @@ class BootStrap {
             ulubionyKompozytor.addToAnswerList(penderecki)
             ulubionyKompozytor.addToAnswerList(kilar)
             ulubionyKompozytor.addToAnswerList(moniuszko)
-
-            //            ulubionyKompozytor.save(flush : true, failOnError:true)
+            voting1.addToQuestionList(ulubionyKompozytor)
 
             Question ulubionyPianistaJazzowy = new Question(
-                            number: 3, type: QuestionTypeEnum.ORDERED, multiplicity: 0,
+                            number: 3, type: QuestionTypeEnum.ORDERED, multiplicity: 3,
                             text: "Jaki jest Twój ulubiony pianista jazzowy")
 
             Answer hancock = new Answer(number: 1, text: "Herbie Hancock")
@@ -67,9 +82,13 @@ class BootStrap {
             ulubionyPianistaJazzowy.addToAnswerList(corea)
             ulubionyPianistaJazzowy.addToAnswerList(jarret)
             ulubionyPianistaJazzowy.addToAnswerList(evans)
+            voting1.addToQuestionList(ulubionyPianistaJazzowy)
 
-            //            ulubionyKompozytor.save(flush : true, failOnError:true)
+            println ("voting1: " + voting1.toString())
 
+            voting1.save()
+
+            // automatic data
             String emailDomain = "@svs.pl"
             for(int i = 1; i <= 5; i++) {
                 String s = String.valueOf(i)
@@ -86,6 +105,7 @@ class BootStrap {
                 int qte = 1
                 for(int q = 1; q <= 3; q++) {
                     QuestionTypeEnum.each {
+
                         int number = qte++
                         String iNumber = String.valueOf(i) + "_" + String.valueOf(number)
 
@@ -101,10 +121,8 @@ class BootStrap {
                         voting.addToQuestionList(question)
                     }
                 }
-
                 voting.save(flush:true, failOnError:true)
             }
-
         }
     }
     def destroy = {

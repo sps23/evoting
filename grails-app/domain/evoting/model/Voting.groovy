@@ -34,7 +34,7 @@ class Voting implements Serializable {
 
     static constraints = {
         name(blank:false)
-        description(blank:false)
+        description(blank:false, size: 5..1000)
         startDate(min : new Date().clearTime(), max : new Date().clearTime().plus(EXP_DATE_MAX))
         endDate(min : new Date().clearTime(), max : new Date().clearTime().plus(END_DATE_MAX))
     }

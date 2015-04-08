@@ -59,6 +59,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${voterInstance?.voting}">
+				<li class="fieldcontain">
+					<span id="voting-label" class="property-label"><g:message code="voter.voting.label" default="Voting" /></span>
+					
+						<span class="property-value" aria-labelledby="voting-label"><g:link controller="voting" action="show" id="${voterInstance?.voting?.id}">${voterInstance?.voting?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:voterInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

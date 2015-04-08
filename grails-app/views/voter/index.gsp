@@ -32,6 +32,8 @@
 					
 						<g:sortableColumn property="submitDate" title="${message(code: 'voter.submitDate.label', default: 'Submit Date')}" />
 					
+						<th><g:message code="voter.voting.label" default="Voting" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -45,6 +47,8 @@
 						<td><g:formatDate date="${voterInstance.lastVisitDate}" /></td>
 					
 						<td><g:formatDate date="${voterInstance.submitDate}" /></td>
+					
+						<td>${fieldValue(bean: voterInstance, field: "voting")}</td>
 					
 					</tr>
 				</g:each>
