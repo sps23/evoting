@@ -13,7 +13,7 @@ class CreateController {
     static scope = "session"
 
     def index() {
-        redirect(action: "init")
+        redirect(action: "createVoting")
     }
 
     def createVotingFlow = {
@@ -31,7 +31,7 @@ class CreateController {
         }
 
         createBasics {
-            on("createQuestions") {
+            on("createBasics") {
                 log.info("params:\n" + params)
                 Voting voting = new Voting(params)
                 int numberOfVoters = params.int("numberOfVoters")

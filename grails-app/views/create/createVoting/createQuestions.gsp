@@ -8,20 +8,17 @@
 </head>
 <body>
 	<h1>EVoting CreateQuestions</h1>
-	<p>
-		voting =${voting}
-	</p>
+
 	<div class="bs-docs-section clearfix">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="well bs-component">
-					<g:form controller="create" action="createVoting"
-						class="form-horizontal">
+					<g:form controller="create" action="createVoting" class="form-horizontal">
 						<fieldset>
 							<legend>EVoting Voters</legend>
 							<g:each var="index" in="${ (0..<numberOfVoters) }">
 								<div class="form-group">
-									<label for="name" class="col-lg-2 control-label">Email${index + 1}
+									<label for="voterList[${index}].email" class="col-lg-2 control-label">Email${index + 1}
 									</label>
 									<div class="col-lg-10">
 										<g:field type="email" name="voterList[${index}].email"
@@ -38,7 +35,7 @@
 								</legend>
 								<g:hiddenField name="questionList[${index}].number" value="${index + 1}"/>
 								<div class="form-group">
-									<label for="name" class="col-lg-2 control-label">Content</label>
+									<label for="questionList[${index}].text" class="col-lg-2 control-label">Content</label>
 									<div class="col-lg-10">
 										<g:textArea name="questionList[${index}].text"
 											placeholder="Content of question" class="form-control"
@@ -46,7 +43,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="type" class="col-lg-2 control-label">Type</label>
+									<label for="questionList[${index}].type" class="col-lg-2 control-label">Type</label>
 									<div class="col-lg-10">
 										<g:select name="questionList[${index}].type"
 											from="${QuestionTypeEnum.values()}"
@@ -54,14 +51,14 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="type" class="col-lg-2 control-label">Multiplicity</label>
+									<label for="questionList[${index}].multiplicity" class="col-lg-2 control-label">Multiplicity</label>
 									<div class="col-lg-10">
 										<g:field name="questionList[${index}].multiplicity"
 											type="number" min="1" max="10"/>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="name" class="col-lg-2 control-label">Answers</label>
+									<label for="questionList[${index}].answerString" class="col-lg-2 control-label">Answers</label>
 									<div class="col-lg-10">
 										<g:textArea name="questionList[${index}].answerString"
 											placeholder="Answers (each in separate line)"
@@ -73,9 +70,9 @@
 
 						<div class="form-group">
 							<div class="col-lg-10 col-lg-offset-2">
-								<g:submitButton name="createSummary" value="Back to Basics"
+								<g:submitButton name="backToBasics" value="Back to Basics"
 									class="btn btn-default" />
-								<g:submitButton name="createSummary" value="Create Summary"
+								<g:submitButton name="createQuestions" value="Create Summary"
 									class="btn btn-primary" />
 							</div>
 						</div>

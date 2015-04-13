@@ -6,7 +6,6 @@ class Answer implements Serializable {
 
     Integer number
     String text
-    Question question
 
     static constraints = {
         number(min:1, max:10)
@@ -15,6 +14,6 @@ class Answer implements Serializable {
 
     @Override
     public String toString() {
-        return "#" + number + ". " + text
+        return number + ". " + text
     }
 }

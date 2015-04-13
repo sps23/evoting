@@ -16,7 +16,7 @@
 		<g:message code="voting.description.label" default="Description" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="description" required="" value="${votingInstance?.description}"/>
+	<g:textArea name="description" cols="40" rows="5" maxlength="1000" required="" value="${votingInstance?.description}"/>
 
 </div>
 
@@ -79,7 +79,16 @@
 		<g:message code="voting.questionList.label" default="Question List" />
 		
 	</label>
-	<g:select name="questionList" from="${evoting.model.Question.list()}" multiple="multiple" optionKey="id" size="5" value="${votingInstance?.questionList*.id}" class="many-to-many"/>
+	
+<ul class="one-to-many">
+<g:each in="${votingInstance?.questionList?}" var="q">
+    <li><g:link controller="question" action="show" id="${q.id}">${q?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="question" action="create" params="['voting.id': votingInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'question.label', default: 'Question')])}</g:link>
+</li>
+</ul>
+
 
 </div>
 
@@ -124,7 +133,16 @@
 		<g:message code="voting.voterList.label" default="Voter List" />
 		
 	</label>
-	<g:select name="voterList" from="${evoting.model.Voter.list()}" multiple="multiple" optionKey="id" size="5" value="${votingInstance?.voterList*.id}" class="many-to-many"/>
+	
+<ul class="one-to-many">
+<g:each in="${votingInstance?.voterList?}" var="v">
+    <li><g:link controller="voter" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="voter" action="create" params="['voting.id': votingInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'voter.label', default: 'Voter')])}</g:link>
+</li>
+</ul>
+
 
 </div>
 
