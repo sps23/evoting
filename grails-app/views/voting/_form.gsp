@@ -151,7 +151,16 @@
 		<g:message code="voting.votingAnswerList.label" default="Voting Answer List" />
 		
 	</label>
-	<g:select name="votingAnswerList" from="${evoting.model.VotingAnswer.list()}" multiple="multiple" optionKey="id" size="5" value="${votingInstance?.votingAnswerList*.id}" class="many-to-many"/>
+	
+<ul class="one-to-many">
+<g:each in="${votingInstance?.votingAnswerList?}" var="v">
+    <li><g:link controller="votingAnswer" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="votingAnswer" action="create" params="['voting.id': votingInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'votingAnswer.label', default: 'VotingAnswer')])}</g:link>
+</li>
+</ul>
+
 
 </div>
 

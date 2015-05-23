@@ -8,7 +8,12 @@
 </head>
 <body>
 	<h1>EVoting AnswerQuestions</h1>
-
+	<div class="panel panel-default">
+		<div class="panel-heading">VOTER</div>
+		<div class="panel-body">
+			${voter.email}
+		</div>
+	</div>
 	<div class="bs-docs-section clearfix">
 		<div class="row">
 			<div class="col-lg-12">
@@ -17,78 +22,55 @@
 					<g:form controller="participate" action="participateInVoting"
 						class="form-horizontal">
 
-						<g:each var="index" in="${voting.questionList}" var="question"
-							status="indexQ">
+						<g:each in="${votingAnswer.questionAnswerList}"
+							var="questionAnswer" status="indexQ">
 							<fieldset>
 								<legend>
 									${indexQ + 1}.
-									${question.text}
+									${questionAnswer.question.text}
 									?
 								</legend>
 
 								<div class="form-group">
-
-									<g:if test="${question.type == QuestionTypeEnum.SINGLE}">
-										<g:set var="answerType" value="radio" />
-
-										<g:each in="${question.answerList}" var="answer"
-											status="indexA">
-											<div class="col-lg-10">
-												<div class="checkbox">
-													<label>
-														<g:field name="question[${indexQ}].answer" type="${answerType}" multiple="false" />
-															${indexA + 1}. ${answer.text}
-													</label>
-												</div>
-											</div>
-										</g:each>
-<%--
-										<g:radioGroup values="${question.answerList}"
-											labels="${question.answerList}"
-											name="question[${indexQ}].answer">
-
-											<div class="col-lg-10">
+									<g:each in="${questionAnswer.question.answerList}" var="answer"
+										status="indexA">
+										<div class="col-lg-10">
+											<g:if
+												test="${questionAnswer.question.type == QuestionTypeEnum.SINGLE}">
 												<div class="radio">
-													<label> ${it.radio} ${it.label}
+													<label> <g:radio
+															name="questionAnswerList[${indexQ}].answerList"
+															value="${answer.id}"
+															checked="${votingAnswer.questionAnswerList[indexQ].answerList.contains(answer)}" />
+														${indexA + 1}. ${answer.text}
 													</label>
 												</div>
-											</div>
-										</g:radioGroup>
- --%>
-									</g:if>
-									<g:elseif test="${question.type == QuestionTypeEnum.MULTIPLE}">
-										<g:set var="answerType" value="checkbox" />
-
-										<g:each in="${question.answerList}" var="answer"
-											status="indexA">
-											<div class="col-lg-10">
+											</g:if>
+											<g:elseif
+												test="${questionAnswer.question.type == QuestionTypeEnum.MULTIPLE}">
 												<div class="checkbox">
-													<label for="question[${indexQ}].answer[${indexA}]">
-														<g:field name="question[${indexQ}].answer[${indexA}]"
-															type="${answerType}" multiple="false" /> ${indexA + 1}. ${answer.text}
+													<label> <g:checkBox
+															name="questionAnswerList[${indexQ}].answerList"
+															value="${answer.id}"
+															checked="${votingAnswer.questionAnswerList[indexQ].answerList.contains(answer)}" />
+														${indexA + 1}. ${answer.text}
 													</label>
 												</div>
-											</div>
-										</g:each>
-
-									</g:elseif>
-									<g:elseif test="${question.type == QuestionTypeEnum.ORDERED}">
-										<g:set var="answerType" value="checkbox" />
-
-										<g:each in="${question.answerList}" var="answer"
-											status="indexA">
-											<div class="col-lg-10">
-												<g:select name="question[${indexQ}].answer[${indexA}]"
-													from="${1..question.answerList.size()}" />
-												${answer.text}
-											</div>
-										</g:each>
-									</g:elseif>
-
+											</g:elseif>
+											<g:elseif
+												test="${questionAnswer.question.type == QuestionTypeEnum.ORDERED}">
+												<label> ${indexA + 1}. <g:select
+														name="questionAnswerList[${indexQ}].answerList"
+														from="${questionAnswer.question.answerList}"
+														optionKey="id" optionValue="text"
+														value="${votingAnswer.questionAnswerList[indexQ].answerList[indexA]?.id}" />
+												</label>
+											</g:elseif>
+										</div>
+									</g:each>
 								</div>
 							</fieldset>
 						</g:each>
-
 						<div class="form-group">
 							<div class="col-lg-10 col-lg-offset-2">
 								<g:submitButton name="answerQuestions" value="Answer"

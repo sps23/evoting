@@ -28,6 +28,8 @@
 					
 						<th><g:message code="votingAnswer.voter.label" default="Voter" /></th>
 					
+						<th><g:message code="votingAnswer.voting.label" default="Voting" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -37,6 +39,8 @@
 						<td><g:link action="show" id="${votingAnswerInstance.id}">${fieldValue(bean: votingAnswerInstance, field: "submissionDate")}</g:link></td>
 					
 						<td>${fieldValue(bean: votingAnswerInstance, field: "voter")}</td>
+					
+						<td>${fieldValue(bean: votingAnswerInstance, field: "voting")}</td>
 					
 					</tr>
 				</g:each>

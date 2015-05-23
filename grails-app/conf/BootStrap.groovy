@@ -84,9 +84,38 @@ class BootStrap {
             ulubionyPianistaJazzowy.addToAnswerList(evans)
             voting1.addToQuestionList(ulubionyPianistaJazzowy)
 
-            println ("voting1: " + voting1.toString())
+            //            println ("voting1: " + voting1.toString())
+            //            voting1.save(flush:true, failOnError:true)
 
-            voting1.save()
+            // votingAnswers
+            VotingAnswer votingAnswer = new VotingAnswer(voter : voterKate)
+            voterKate.setSubmitDate(votingAnswer.getSubmissionDate())
+
+            QuestionAnswer qAnswerUlubionyPoeta = new QuestionAnswer(question: ulubionyPoeta)
+            qAnswerUlubionyPoeta.addToAnswerList(mickiewicz)
+            votingAnswer.addToQuestionAnswerList(qAnswerUlubionyPoeta)
+
+            QuestionAnswer qAnswerUlubionyKompozytor = new QuestionAnswer(question: ulubionyKompozytor)
+            qAnswerUlubionyKompozytor.addToAnswerList(chopin)
+            qAnswerUlubionyKompozytor.addToAnswerList(szymanowski)
+            votingAnswer.addToQuestionAnswerList(qAnswerUlubionyKompozytor)
+
+            QuestionAnswer qAnswerUlubionyPianistaJazzowy = new QuestionAnswer(question: ulubionyPianistaJazzowy)
+            qAnswerUlubionyPianistaJazzowy.addToAnswerList(hancock)
+            qAnswerUlubionyPianistaJazzowy.addToAnswerList(jarret)
+            qAnswerUlubionyPianistaJazzowy.addToAnswerList(corea)
+            qAnswerUlubionyPianistaJazzowy.addToAnswerList(brubeck)
+            qAnswerUlubionyPianistaJazzowy.addToAnswerList(evans)
+            votingAnswer.addToQuestionAnswerList(qAnswerUlubionyPianistaJazzowy)
+
+            voting1.addToVotingAnswerList(votingAnswer)
+
+
+            println ("voting1: " + voting1.toString())
+            voting1.save(flush:true, failOnError:true)
+
+
+            // generated voting data
 
             // automatic data
             String emailDomain = "@svs.pl"
@@ -94,7 +123,7 @@ class BootStrap {
                 String s = String.valueOf(i)
 
                 Creator creator = new Creator(email: ("creator_" + s + emailDomain), token: TokenGenerator.generateToken())
-                Voting  voting = new Voting(name : ("Voting_" + s), description: ("voting_" + s + "_description"), creator: creator)
+                Voting  voting = new Voting(name : ("Voting_" + s),description: ("voting_" + s + "_description"),creator: creator)
 
                 for(int j = 1; j <= 8; j++) {
                     String v = s + "_" + String.valueOf(j)

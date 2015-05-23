@@ -2,6 +2,7 @@ package evoting.model
 
 class VotingAnswer implements Serializable {
 
+    static belongsTo = [voting : Voting]
     static hasMany = [ questionAnswerList : QuestionAnswer]
 
     Date submissionDate = new Date()
@@ -15,6 +16,17 @@ class VotingAnswer implements Serializable {
     }
     @Override
     public String toString() {
-        return submissionDate + ", [" + voter + "] qa:" + questionAnswerList
+        StringBuilder builder = new StringBuilder()
+        builder.append(getClass().getName())
+        builder.append("[")
+        builder.append(System.identityHashCode(this))
+        builder.append("] {\n\tsubmissionDate: ")
+        builder.append(submissionDate)
+        builder.append("\n\tvoter: ")
+        builder.append(voter)
+        builder.append("\n\tquestionAnswerList: ")
+        builder.append(questionAnswerList)
+        builder.append("\n}")
+        return builder.toString()
     }
 }

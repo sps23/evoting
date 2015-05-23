@@ -14,6 +14,15 @@ class QuestionAnswer implements Serializable {
 
     @Override
     public String toString() {
-        return "q:" + question + ", a:" + answerList + "]"
+        StringBuilder builder = new StringBuilder()
+        builder.append(getClass().getName())
+        builder.append("[")
+        builder.append(System.identityHashCode(this))
+        builder.append("] {\n\tquestion: ")
+        builder.append(question)
+        builder.append("\n\tanswerList: ")
+        builder.append(answerList)
+        builder.append("\n}")
+        return builder.toString()
     }
 }

@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="utf-8">
-<title>Bootswatch: Journal</title>
+<title>Easy Voting</title>
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta content="IE=edge" http-equiv="X-UA-Compatible">
 
@@ -13,7 +13,6 @@
 	rel="stylesheet">
 
 <!-- Custom CSS -->
-
 
 <g:layoutHead />
 
@@ -28,8 +27,8 @@
 		</div>
 
 		<g:render template="/templates/journal/jumbotron" />
-		
-		<g:layoutBody/>
+
+		<g:layoutBody />
 
 	</div>
 </body>

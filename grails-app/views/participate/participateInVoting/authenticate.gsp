@@ -12,7 +12,8 @@
 			<div class="col-lg-12">
 				<div class="well bs-component">
 
-					<g:form controller="participate" action="participateInVoting" class="form-horizontal">
+					<g:form controller="participate" action="participateInVoting"
+						class="form-horizontal">
 						<fieldset>
 							<legend>Provide Authentication Data</legend>
 							<div class="form-group">
@@ -23,9 +24,10 @@
 							</div>
 							<div class="form-group">
 								<label for="voter.token" class="col-lg-2 control-label">Token</label>
-                                <div class="col-lg-10">
-                                    <g:field type="password" name="voter.token" class="form-control" />
-                                </div>
+								<div class="col-lg-10">
+									<g:field type="password" name="voter.token"
+										class="form-control" />
+								</div>
 							</div>
 						</fieldset>
 
